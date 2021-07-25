@@ -18,7 +18,6 @@ class BookResource extends JsonResource
         return [
             'id' => $this->id,
             'isbn13' => $this->isbn13,
-            'user_id' => $this->user_id,
             'user' => new UserResource($user),
         ];
     }

@@ -13,10 +13,10 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Book $book)
     {
         $books = Book::with(['user']);
-        return BookResource::collection($books->paginate(50))->response();
+        return BookResource::collection($books->get());
     }
 
     /**
