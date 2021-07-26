@@ -19,8 +19,9 @@ class BookController extends Controller
      */
     public function index(Book $book)
     {
-        $books = Book::with(['user']);
-        return BookResource::collection($books->get());
+        return Book::where('user_id', '=', auth()->user()->id)->get();
+        // $books = Book::with(['user']);
+        // return BookResource::collection($books->get());
     }
 
     /**
@@ -33,7 +34,7 @@ class BookController extends Controller
     {
         return Book::create([
             'isbn13' => $request->isbn13,
-            'user_id' => $request->user()->id,
+            'user_id' => auth()->user()->id,
         ]);
     }
 

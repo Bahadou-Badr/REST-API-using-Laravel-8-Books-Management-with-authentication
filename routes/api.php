@@ -21,7 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/books', [BookController::class, 'index']);
-Route::post('/books', [BookController::class, 'store']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [ApiAuthController::class, 'logout'])->name('logout');
+    Route::get('/books', [BookController::class, 'index']);
+    Route::post('/books', [BookController::class, 'store']);
+});
+
 Route::post('/login', [ApiAuthController::class, 'login'])->name('login');
+Route::post('/registre', [ApiAuthController::class, 'registre'])->name('registre');
 // Route::get('/users', [UserController::class, 'index']);
