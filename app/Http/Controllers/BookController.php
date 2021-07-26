@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +31,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Book::create([
+            'isbn13' => $request->isbn13,
+            'user_id' => $request->user()->id,
+        ]);
     }
 
     /**

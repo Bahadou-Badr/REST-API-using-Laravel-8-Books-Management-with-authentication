@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -20,5 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/books', [BookController::class, 'index'])->name('books');
+Route::get('/books', [BookController::class, 'index']);
+Route::post('/books', [BookController::class, 'store']);
+Route::post('/login', [ApiAuthController::class, 'login'])->name('login');
 // Route::get('/users', [UserController::class, 'index']);
